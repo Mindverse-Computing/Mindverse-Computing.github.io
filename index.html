@@ -542,11 +542,11 @@
 
 
 <!------------Footer--------------------------------------------->
-
 <div class="site-footer">
   <div class="container">
     <div class="row">
 
+      <!-- About and Social -->
       <div class="col-lg-3 mr-auto">
         <div class="widget">
           <h3><a href="about.html">About Us</a></h3>
@@ -565,29 +565,39 @@
         </div>
       </div>
 
+
+
+      <!-- Newsletter Subscription (Google Sheets) -->
       <div class="col-lg-6 col-md-12">
-          <div class="single-footer-widget newsletter">
-              <h3 class="mb-20">Join Our Newsletter</h3>
-              <p>Stay updated with our latest research, events, and breakthroughs in quantum virtual minds and BCI. We only send valuable insights, no spam.</p>
-              <div id="mc_embed_signup">
-                  <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&id=92a4423d01" method="get" class="form-inline">
-                      <div class="form-group row" style="width: 100%">
-                          <div class="col-lg-8 col-md-12">
-                              <input name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
-                              <div style="position: absolute; left: -5000px;">
-                                  <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-                              </div>
-                          </div>
-                          <div class="col-lg-4 col-md-12">
-                              <button class="nw-btn primary-btn">Subscribe<span class="lnr lnr-arrow-right"></span></button>
-                          </div>
-                      </div>
-                      <div class="info"></div>
-                  </form>
+        <div class="single-footer-widget newsletter">
+          <h3 class="mb-20">Join Our Newsletter</h3>
+          <p>Stay updated with our latest research, events, and breakthroughs in quantum virtual minds and BCI. We only send valuable insights, no spam.</p>
+
+          
+            <form id="subscribe-form">
+              <div class="form-group row" style="width: 100%">
+                <div class="col-lg-8 col-md-12">
+                  <input name="email" id="email-input" placeholder="Enter Email" required type="email"
+                    class="form-control"
+                    style="background-color: white; color: #000; border: 1px solid #ccc; border-radius: 6px;">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                  <button type="submit" class="nw-btn primary-btn">Subscribe</button>
+                </div>
               </div>
-          </div>
+            </form>
+
+
+          <div id="subscribe-message" style="margin-top: 10px; color: white;"></div>
+        </div>
       </div>
 
+
+
+
+      
+
+      <!-- Use Cases -->
       <div class="col-lg-2 ml-auto">
         <div class="widget">
           <h3><a href="#courses">Use cases of QVM</a></h3>
@@ -601,10 +611,11 @@
         </div>
       </div>
 
+      <!-- Contact -->
       <div class="col-lg-3">
         <div class="widget">
           <h3><a href="contact.html">Contact</a></h3>
-          <address> Lynnwood, WA-98087, USA</address>
+          <address>Lynnwood, WA-98087, USA</address>
           <ul class="list-unstyled links mb-4">
             <li><a href="mailto:contact.mindversecomputing@gmail.com">contact.mindversecomputing@gmail.com</a></li>
           </ul>
@@ -613,26 +624,52 @@
 
     </div>
 
+    <!-- Footer Bottom -->
     <div class="row mt-5">
       <div class="col-12 text-center">
-        <p>Copyright ©<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. — Designed with love by <a href="https://untree.co">Untree.co</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
+        <p>
+          Copyright &copy;
+          <script>document.write(new Date().getFullYear());</script>. All Rights Reserved. —
+          Designed with love by <a href="https://untree.co">Untree.co</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a>
         </p>
       </div>
     </div>
   </div>
 </div>
 
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.fancybox.min.js"></script>
-  <script src="js/jquery.sticky.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/custom.js"></script>
+<!-- Newsletter Script for Google Sheets -->
+<script>
+  document.getElementById("subscribe-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = document.getElementById("email-input").value;
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyMOuZ-fyRw1w7wyqUb4kydViXYUa2k1f41DxeShzBUr5xaNU4V5J8yPOgeX-8z8I9dmA/exec";
+    const formData = new FormData();
+    formData.append("email", email);
+
+    fetch(scriptURL, { method: "POST", body: formData })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("subscribe-message").innerText = "Subscription successful!";
+        document.getElementById("email-input").value = "";
+      })
+      .catch(error => {
+        document.getElementById("subscribe-message").innerText = "Error. Try again.";
+        console.error("Error!", error.message);
+      });
+  });
+</script>
+
+<!-- Scripts -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/custom.js"></script>
 
 </body>
-
 </html>
